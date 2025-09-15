@@ -1,27 +1,45 @@
-# Titanic Dataset: Data Preprocessing, Cleaning, and EDA
+# Titanic Dataset: Data Preprocessing, Cleaning, and Modeling
 
 ## Overview
-This project is a data preprocessing and exploratory data analysis (EDA) assignment focused on the famous Titanic dataset, available on Kaggle. The goal is to clean the raw data, prepare it for machine learning, and perform a deep analysis to uncover patterns related to passenger survival.
+This project is a complete data science workflow on the famous Titanic dataset. It covers all the essential steps from initial data exploration and cleaning to building and evaluating machine learning models. The primary goal is to predict passenger survival based on various features and to understand which factors were most influential in the outcome.
 
-The notebook performs the following key tasks:
+The Jupyter Notebook, `Titanic_Dataset_assignment.ipynb`, contains the complete code for this analysis.
 
-- **Data Loading and Initial Exploration**: Loading the `train.csv` file and examining its structure, data types, and initial statistics.
-- **Handling Missing Values**: Identifying and addressing missing data in key columns like `Age`, `Cabin`, and `Embarked`.
-- **Feature Engineering**: Creating a new feature, `FamilySize`, to better understand the impact of family on survival.
-- **Feature Encoding**: Converting categorical features (`Sex`, `Embarked`) into a numerical format suitable for modeling.
-- **Feature Scaling**: Standardizing numerical features (`Age`, `Fare`) to a consistent scale.
-- **Exploratory Data Analysis (EDA)**: Visualizing relationships between different features and the `Survived` target variable to gain insights.
+## Project Steps
+The project is structured into the following key phases:
+
+### 1. Initial Data Exploration (EDA)
+- **Loading Data**: Loading the `train.csv` file.  
+- **Data Overview**: Using `df.info()` and `df.describe()` to examine data types, missing values, and statistical summaries.  
+- **Visualization**: Visualizing the distributions of key features like `Survived`, `Age`, `Sex`, and `Pclass` to find initial insights.
+
+### 2. Data Preprocessing and Cleaning
+- **Handling Missing Values**:  
+  - Missing `Age` values are filled with the median.  
+  - `Embarked` values are filled with the mode.  
+  - `Cabin` column is dropped due to excessive missing data.  
+- **Feature Engineering**: A new feature, `FamilySize`, is created by combining `SibSp` and `Parch` to analyze the impact of family on survival.  
+- **Encoding Categorical Features**:  
+  - `Sex` column is converted to numerical values using `LabelEncoder`.  
+  - `Embarked` column is one-hot encoded.  
+- **Scaling Numerical Features**: `Age` and `Fare` are scaled using `StandardScaler` to ensure all features have a similar range.
+
+### 3. Model Training and Evaluation
+- **Data Splitting**: The cleaned dataset is split into training and testing sets.  
+- **Model Selection**: Decision Tree and Logistic Regression models are used as baseline and slightly more complex alternatives.  
+- **Cross-Validation**: K-Fold cross-validation (5 folds) is applied to get a robust estimate of model performance.  
+- **Evaluation Metrics**: Accuracy, Precision, Recall, and F1-Score are calculated for model evaluation.
 
 ## How to Run the Notebook
-1. **Download the Dataset**: Download the `train.csv` file from the Kaggle Titanic competition page.
-2. **Upload to Google Colab**: Upload the `train.csv` file directly to your Google Colab notebook's file system.
-3. **Open the Notebook**: Open the `Titanic Dataset assignment.ipynb` notebook in Google Colab.
-4. **Run All Cells**: Run all the code cells in the notebook in sequence. The code is structured to perform each step from loading to final analysis.
+1. **Download the Dataset**: Download the `train.csv` file from the Kaggle Titanic competition page.  
+2. **Upload to Colab**: Upload the `train.csv` file to your Google Colab notebook's file system.  
+3. **Run All Cells**: Open `Titanic_Dataset_assignment.ipynb` and run all code cells sequentially.
 
-## Key Findings from EDA
-Based on the analysis, several factors were highly correlated with a passenger's chance of survival:
+## Results Summary
+The model evaluation using 5-Fold Cross-Validation provides a robust measure of performance.  
 
-- **Gender**: Females had a significantly higher survival rate than males, supporting the "women and children first" protocol.
-- **Passenger Class**: Passengers in the first class had a much higher survival rate compared to those in the second and third classes, indicating that social status was a major factor.
-- **Family Size**: Passengers traveling with small families (2-4 people) had the best survival rates. Those traveling alone or in very large families were less likely to survive.
-- **Fare**: There was a strong positive correlation between the ticket fare and survival, which is likely related to passenger class.
+**Decision Tree Model Average Scores**:
+- Accuracy: 0.7801  
+- Precision: 0.7200  
+- Recall: 0.6988  
+- F1-Score: 0.7086
